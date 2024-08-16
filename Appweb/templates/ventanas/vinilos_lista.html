@@ -1,0 +1,13 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Listado de vinilos en venta: </h1>
+    {% for v in vinilo %}
+        <ul>
+            <li>
+                <strong>Artista: </strong>{{ v.artista }} | <strong>Álbum: </strong>{{ v.album }} |
+                <strong>Género: </strong>{{ v.genero }} | <strong>Precio: $</strong>{{ v.precio }}
+            </li>
+        </ul>
+    {% endfor %}
+{% endblock %}

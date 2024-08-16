@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Proyecto</title>
+    <link rel="stylesheet" href="{% static 'aplicacion/css/bootstrap.min.css' %}">
+    <link rel="icon" href="{% static 'aplicacion/assets/icono.ico' %}">
+    <link rel="stylesheet" href="{% static 'aplicacion/css/estilos.css' %}">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a>Inicio</a>
+            <a>Vinilos</a>
+            <a>Tocadiscos</a>
+            <a>Parlantes</a>
+            <a>
+                <button type="button" class="btn btn-warning">Ingresar</button>
+            </a>
+        </div>
+    </nav>
+</header>
+<main class="cuerpo" style="background-color: goldenrod">
+    {% block main %}
+
+    {% endblock %}
+</main>
+<footer style="background-color: #ccc2a4">
+    <div>
+        <p>Pié de página</p>
+    </div>
+</footer>
+<script> src="{% static 'aplicacion/js/bootstrap.bundle.min.js' %}"</script>
+</body>
+</html>
