@@ -5,9 +5,17 @@
     {% for v in vinilo %}
         <ul>
             <li>
-                <strong>Artista: </strong>{{ v.artista }} | <strong>Álbum: </strong>{{ v.album }} |
-                <strong>Género: </strong>{{ v.genero }} | <strong>Precio: $</strong>{{ v.precio }}
+                <strong>Artista: </strong>{{ v.artista }}
+                <p>
+                    <a href="{% url 'VinilosDetalle' v.pk %}">Ver</a>
+                    <a href="{% url 'EditarVinilo' v.pk %}">Editar</a>
+                    <a href="{% url 'BorrarVinilo' v.pk %}">Borrar</a>
+                </p>
             </li>
         </ul>
     {% endfor %}
+    <br>
+    <p>
+        <a href="{% url 'CrearVinilo' %}">Crear</a>
+    </p>
 {% endblock %}

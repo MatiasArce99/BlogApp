@@ -1,0 +1,17 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Detalle del parlante</h1>
+    <ul>
+        <li>
+            <strong>Marca: </strong><i>{{ parlante.marca }}</i>
+            <strong>Tipo: </strong><i>{{ parlante.tipo }}</i>
+            <strong>Potencia: </strong><i>{{ parlante.potencia }}</i>
+            <strong>Precio: $</strong><i>{{ parlante.precio }}</i>
+        </li>
+    </ul>
+    <br>
+    <p>
+        <a href="{% url 'ListarParlantes' %}">Regresar</a>
+    </p>
+{% endblock %}

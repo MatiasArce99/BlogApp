@@ -1,0 +1,10 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Borrar tocadiscos</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        Seguro que desea eliminar {{ reproductor.marca }} - {{ reproductor.modelo }}?
+        <input type="submit" value="Eliminar">
+    </form>
+{% endblock %}

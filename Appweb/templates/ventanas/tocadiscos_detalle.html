@@ -1,0 +1,16 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Detalle del tocadiscos</h1>
+    <ul>
+        <li>
+            <strong>Marca: </strong><i>{{ reproductor.marca }}</i>
+            <strong>Modelo: </strong><i>{{ reproductor.modelo }}</i>
+            <strong>Precio: $</strong><i>{{ reproductor.precio }}</i>
+        </li>
+    </ul>
+    <br>
+    <p>
+        <a href="{% url 'ListarTocadiscos' %}">Regresar</a>
+    </p>
+{% endblock %}

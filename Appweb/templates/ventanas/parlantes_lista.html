@@ -1,0 +1,21 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Listado de parlantes en venta: </h1>
+    {% for p in parlante %}
+        <ul>
+            <li>
+                <strong>Marca: </strong>{{ p.marca }}
+                <p>
+                    <a href="{% url 'DetalleParlantes' p.pk %}">Ver</a>
+                    <a href="{% url 'EditarParlantes' p.pk %}">Editar</a>
+                    <a href="{% url 'BorrarParlantes' p.pk %}">Borrar</a>
+                </p>
+            </li>
+        </ul>
+    {% endfor %}
+    <br>
+    <p>
+        <a href="{% url 'CrearParlantes' %}">Crear</a>
+    </p>
+{% endblock %}

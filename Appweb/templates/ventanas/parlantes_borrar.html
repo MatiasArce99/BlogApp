@@ -1,0 +1,10 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Borrar parlante</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        Seguro que desea eliminar {{ parlante.marca }} - {{ parlante.tipo }} ?
+        <input type="submit" value="Eliminar">
+    </form>
+{% endblock %}

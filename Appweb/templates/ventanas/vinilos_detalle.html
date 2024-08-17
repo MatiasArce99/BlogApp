@@ -1,0 +1,17 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Detalle del vinilo</h1>
+    <ul>
+        <li>
+            <strong>Artista: </strong><i>{{ vinilo.artista }}</i>
+            <strong>Album: </strong><i>{{ vinilo.album }}</i>
+            <strong>Género: </strong><i>{{ vinilo.genero }}</i>
+            <strong>Precio: $</strong><i>{{ vinilo.precio }}</i>
+        </li>
+    </ul>
+    <br>
+    <p>
+        <a href="{% url 'ListarVinilos' %}">Regresar</a>
+    </p>
+{% endblock %}

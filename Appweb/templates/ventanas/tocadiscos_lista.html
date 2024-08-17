@@ -1,0 +1,21 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Listado de tocadiscos en venta: </h1>
+    {% for t in reproductor %}
+        <ul>
+            <li>
+                <strong>Marca: </strong>{{ t.marca }}
+                <p>
+                    <a href="{% url 'DetalleTocadiscos' t.pk %}">Ver</a>
+                    <a href="{% url 'EditarTocadiscos' t.pk %}">Editar</a>
+                    <a href="{% url 'BorrarTocadiscos' t.pk %}">Borrar</a>
+                </p>
+            </li>
+        </ul>
+    {% endfor %}
+    <br>
+    <p>
+        <a href="{% url 'CrearTocadiscos' %}">Crear</a>
+    </p>
+{% endblock %}

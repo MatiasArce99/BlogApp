@@ -4,18 +4,18 @@
     {% load static %}
     <meta charset="UTF-8">
     <title>Proyecto</title>
-    <link rel="stylesheet" href="{% static 'aplicacion/css/bootstrap.min.css' %}">
-    <link rel="icon" href="{% static 'aplicacion/assets/icono.ico' %}">
-    <link rel="stylesheet" href="{% static 'aplicacion/css/estilos.css' %}">
+    <link rel="stylesheet" href="{% static 'aplication/css/bootstrap.min.css' %}">
+    <link rel="icon" href="{% static 'aplication/assets/icono.ico' %}">
+    <link rel="stylesheet" href="{% static 'aplication/css/estilos.css' %}">
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a>Inicio</a>
-            <a>Vinilos</a>
-            <a>Tocadiscos</a>
-            <a>Parlantes</a>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'ListarVinilos' %}">Vinilos</a>
+            <a href="{% url 'ListarTocadiscos' %}">Tocadiscos</a>
+            <a href="{% url 'ListarParlantes' %}">Parlantes</a>
             <a>
                 <button type="button" class="btn btn-warning">Ingresar</button>
             </a>
@@ -32,6 +32,6 @@
         <p>Pié de página</p>
     </div>
 </footer>
-<script> src="{% static 'aplicacion/js/bootstrap.bundle.min.js' %}"</script>
+<script> src="{% static 'aplication/js/bootstrap.bundle.min.js' %}"</script>
 </body>
 </html>
