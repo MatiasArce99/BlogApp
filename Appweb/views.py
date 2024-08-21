@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView
@@ -7,6 +9,33 @@ from .models import *
 
 def ventana_inicio(request):
     return render(request, 'ventanas/inicio.html')
+
+def login_request(request):
+    form = AuthenticationForm(request, data=request.POST)
+    if form.is_valid():
+        usuario = form.cleaned_data.get('username')
+        clave = form.cleaned_data.get('password')
+        user = authenticate(username=usuario, password=clave)
+        if user is not None:
+            login(request, user)
+            return render(request, 'ventanas/inicio.html', {'mensaje':f'Bienvenido {usuario}'})
+        else:
+            return render(request, 'ventanas/inicio.html', {'mensaje':f'Usuario {usuario} no encontrado'})
+    else:
+        return render(request, 'ventanas/inicio.html', {'mensaje':'Formulario erróneo'})
+    form = AuthenticationForm()
+    return render(request,'ventanas/login.html',{'form':form})
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request, 'ventanas/inicio.html', {'mensaje':'Usuario creado'})
+    else:
+        form = UserCreationForm()
+    return render(request, 'ventanas/register.html', {'form':form})
 
 class ViniloListView(ListView):
     model = Vinilo

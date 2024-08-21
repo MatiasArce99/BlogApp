@@ -1,8 +1,12 @@
 from django.urls import path
+from django.contrib.auth.views import LogoutView
 from .views import *
 
 urlpatterns = [
     path('', ventana_inicio, name="inicio"),
+    path('login/', login_request, name="Login"),
+    path('logout/', LogoutView.as_view(template_name='ventanas/logout.html'), name="Logout"),
+    path('register/', register, name="Register"),
     path('vinilosLista/', ViniloListView.as_view(), name='ListarVinilos'),
     path('vinilosDetalle/<pk>', ViniloDetailView.as_view(), name='VinilosDetalle'),
     path('vinilosCrear/', ViniloCreateView.as_view(), name='CrearVinilo'),

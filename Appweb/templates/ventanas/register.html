@@ -2,8 +2,8 @@
 {% load static %}
 {% block main %}
     <form action="" method="POST">
-    {% csrf_token %}
+        {% csrf_token %}
         {{ form.as }}
-        <button type="submit">Iniciar sesión</button>
+        <button type="submit">Registrarse</button>
     </form>
 {% endblock %}
