@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -6,6 +7,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import *
+from .forms import UserRegisterForm
 
 def ventana_inicio(request):
     return render(request, 'ventanas/inicio.html')
@@ -28,14 +30,15 @@ def login_request(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             form.save()
             return render(request, 'ventanas/inicio.html', {'mensaje':'Usuario creado'})
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm(request.POST)
     return render(request, 'ventanas/register.html', {'form':form})
+
 
 class ViniloListView(ListView):
     model = Vinilo
