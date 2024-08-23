@@ -3,7 +3,7 @@
 {% block main %}
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form.as }}
+        {{ form.as_p }}
         <button type="submit">Registrarse</button>
     </form>
 {% endblock %}

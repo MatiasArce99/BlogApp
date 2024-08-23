@@ -12,21 +12,23 @@ from .forms import UserRegisterForm
 def ventana_inicio(request):
     return render(request, 'ventanas/inicio.html')
 
+@login_required
 def login_request(request):
-    form = AuthenticationForm(request, data=request.POST)
-    if form.is_valid():
-        usuario = form.cleaned_data.get('username')
-        clave = form.cleaned_data.get('password')
-        user = authenticate(username=usuario, password=clave)
-        if user is not None:
-            login(request, user)
-            return render(request, 'ventanas/inicio.html', {'mensaje':f'Bienvenido {usuario}'})
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            clave = form.cleaned_data.get('password')
+            user = authenticate(username=usuario, password=clave)
+            if user is not None:
+                login(request, user)
+                return render(request, 'ventanas/inicio.html', {'mensaje':f'Bienvenido {usuario}'})
+            else:
+                return render(request, 'ventanas/inicio.html', {'mensaje':'Error. Datos incorrectos'})
         else:
-            return render(request, 'ventanas/inicio.html', {'mensaje':f'Usuario {usuario} no encontrado'})
-    else:
-        return render(request, 'ventanas/inicio.html', {'mensaje':'Formulario erróneo'})
+            return render(request, 'ventanas/inicio.html', {'mensaje':'Error. Formulario invalido'})
     form = AuthenticationForm()
-    return render(request,'ventanas/login.html',{'form':form})
+    return render(request, 'ventanas/login.html', {'form': form})
 
 def register(request):
     if request.method == 'POST':
@@ -39,6 +41,10 @@ def register(request):
         form = UserRegisterForm(request.POST)
     return render(request, 'ventanas/register.html', {'form':form})
 
+@login_required
+def editarPerfil(request):
+    usuario = request.user
+    #if request.method == 'POST':
 
 class ViniloListView(ListView):
     model = Vinilo
