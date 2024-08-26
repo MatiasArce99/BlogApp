@@ -1,13 +1,15 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import *
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserEditForm
 
 def ventana_inicio(request):
     return render(request, 'ventanas/inicio.html')
@@ -44,7 +46,18 @@ def register(request):
 @login_required
 def editarPerfil(request):
     usuario = request.user
-    #if request.method == 'POST':
+    if request.method == 'POST':
+        miFormulario = UserEditForm(request.POST, instance=request.user)
+        if miFormulario.is_valid():
+            miFormulario.save()
+            return render(request, 'ventanas/inicio.html')
+    else:
+        miFormulario = UserEditForm(instance=request.user)
+    return render(request, 'ventanas/editarPerfil.html', {'form':miFormulario, 'usuario':usuario})
+
+class CambiarContrasenia(LoginRequiredMixin, PasswordChangeView):
+    template_name = 'ventanas/cambiar_clave.html'
+    success_url = reverse_lazy('EditarPerfil')
 
 class ViniloListView(ListView):
     model = Vinilo

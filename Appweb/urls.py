@@ -7,6 +7,8 @@ urlpatterns = [
     path('login/', login_request, name="Login"),
     path('logout/', LogoutView.as_view(template_name='ventanas/logout.html'), name="Logout"),
     path('register/', register, name="Register"),
+    path('editarPerfil/', editarPerfil, name="EditarPerfil"),
+    path('cambiarContrasenia/', CambiarContrasenia.as_view(), name="CambiarContrasenia"),
     #path('editarPerfil/', editarPerfil, name="EditarPerfil"),
     path('vinilosLista/', ViniloListView.as_view(), name='ListarVinilos'),
     path('vinilosDetalle/<pk>', ViniloDetailView.as_view(), name='VinilosDetalle'),

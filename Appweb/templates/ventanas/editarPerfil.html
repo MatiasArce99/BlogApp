@@ -7,6 +7,9 @@
         <table>
             {{ miFormulario.as_table }}
         </table>
-        <input type="submit", value="Enviar">
+        <input type="submit" value="Enviar">
     </form>
+    <button type="button">
+        <a class="navbar-brand" href="{% url 'CambiarContrasenia' %}">Cambiar contraseña</a>
+    </button>
 {% endblock %}
