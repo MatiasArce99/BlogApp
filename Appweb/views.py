@@ -14,7 +14,7 @@ from .forms import UserRegisterForm, UserEditForm
 def ventana_inicio(request):
     return render(request, 'ventanas/inicio.html')
 
-@login_required
+#@login_required
 def login_request(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -43,16 +43,16 @@ def register(request):
         form = UserRegisterForm(request.POST)
     return render(request, 'ventanas/register.html', {'form':form})
 
-@login_required
+#@login_required
 def editarPerfil(request):
     usuario = request.user
     if request.method == 'POST':
-        miFormulario = UserEditForm(request.POST, instance=request.user)
+        miFormulario = UserEditForm(request.POST, instance=usuario)
         if miFormulario.is_valid():
             miFormulario.save()
             return render(request, 'ventanas/inicio.html')
     else:
-        miFormulario = UserEditForm(instance=request.user)
+        miFormulario = UserEditForm(instance=usuario)
     return render(request, 'ventanas/editarPerfil.html', {'form':miFormulario, 'usuario':usuario})
 
 class CambiarContrasenia(LoginRequiredMixin, PasswordChangeView):
