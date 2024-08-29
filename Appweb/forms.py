@@ -16,8 +16,10 @@ class UserRegisterForm(UserCreationForm):
 class UserEditForm(UserChangeForm):
     password = None
     email = forms.EmailField(label='Ingrese su correo: ')
-    apellido = forms.CharField(label='Ingrese su apellido: ')
-    nombre = forms.CharField(label='Ingrese su nombre: ')
+    apellido = forms.CharField(label='Apellido: ', required=False)
+    nombre = forms.CharField(label='Nombre: ', required=False)
+    imagen = forms.ImageField(label='Imagen: ', required=False)
+
     class Meta:
         model = User
         fields = ['email', 'apellido', 'nombre']

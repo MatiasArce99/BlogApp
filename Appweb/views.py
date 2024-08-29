@@ -47,12 +47,15 @@ def register(request):
 def editarPerfil(request):
     usuario = request.user
     if request.method == 'POST':
-        miFormulario = UserEditForm(request.POST, instance=usuario)
+        miFormulario = UserEditForm(request.POST, request.FILES, instance=usuario)
         if miFormulario.is_valid():
+            if miFormulario.cleaned_data.get('imagen'):
+                usuario.avatar.imagen = miFormulario.cleaned_data.get('imagen')
+                usuario.avatar.save()
             miFormulario.save()
             return render(request, 'ventanas/inicio.html')
     else:
-        miFormulario = UserEditForm(instance=usuario)
+        miFormulario = UserEditForm(initial={'imagen':usuario.avatar.imagen}, instance=usuario)
     return render(request, 'ventanas/editarPerfil.html', {'form':miFormulario, 'usuario':usuario})
 
 class CambiarContrasenia(LoginRequiredMixin, PasswordChangeView):

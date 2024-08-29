@@ -19,9 +19,7 @@
             <a class="btn btn-primary" href="{% url 'Login' %}">Login</a>
             <a class="btn btn-primary" href="{% url 'Register' %}">Registrarse</a>
             <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
-            <a>
-                <button type="button" class="btn btn-warning">Ingresar</button>
-            </a>
+            <img src="{{ request.user.avatar.imagen.url }}" alt="" height="40px">
         </div>
     </nav>
 </header>
