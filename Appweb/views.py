@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView
@@ -16,6 +17,7 @@ def ventana_inicio(request):
 
 #@login_required
 def login_request(request):
+    msg_login = ""
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -24,24 +26,23 @@ def login_request(request):
             user = authenticate(username=usuario, password=clave)
             if user is not None:
                 login(request, user)
-                return render(request, 'ventanas/inicio.html', {'mensaje':f'Bienvenido {usuario}'})
-            else:
-                return render(request, 'ventanas/inicio.html', {'mensaje':'Error. Datos incorrectos'})
-        else:
-            return render(request, 'ventanas/inicio.html', {'mensaje':'Error. Formulario invalido'})
+                next_url = request.GET.get('next', '/')
+                return HttpResponseRedirect(next_url)
+        msg_login = "Usuario o contraseña incorrectos"
     form = AuthenticationForm()
-    return render(request, 'ventanas/login.html', {'form': form})
+    return render(request, 'ventanas/login.html', {'form': form, 'msg_login': msg_login})
 
 def register(request):
+    msg_register = ""
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
             form.save()
-            return render(request, 'ventanas/inicio.html', {'mensaje':'Usuario creado'})
+            return render(request, 'ventanas/inicio.html')
+        msg_register = "Error al registrar el usuario"
     else:
         form = UserRegisterForm(request.POST)
-    return render(request, 'ventanas/register.html', {'form':form})
+    return render(request, 'ventanas/register.html', {'form':form, 'msg_register': msg_register})
 
 #@login_required
 def editarPerfil(request):

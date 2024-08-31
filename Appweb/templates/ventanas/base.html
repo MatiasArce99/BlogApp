@@ -19,7 +19,27 @@
             <a class="btn btn-primary" href="{% url 'Login' %}">Login</a>
             <a class="btn btn-primary" href="{% url 'Register' %}">Registrarse</a>
             <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
-            <img src="{{ request.user.avatar.imagen.url }}" alt="" height="40px">
+            {% if request.user.is_authenticated %}
+                <img src="{{ request.user.imagen.imagen.url }}" alt="" style="height: 50px;width: 50px;">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ request.user.name }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+                {% else %}
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Cuenta
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{% url 'Login' %}">Iniciar Sesión</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Register' %}">Crear cuenta</a></li>
+                    </ul>
+                </div>
+            {% endif %}
         </div>
     </nav>
 </header>

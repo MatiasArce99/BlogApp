@@ -1,9 +1,15 @@
 {% extends 'ventanas/base.html' %}
 {% load static %}
 {% block main %}
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Iniciar sesión</button>
-    </form>
+    <div class="d-flex justify-content-center">
+        <div class="d-flex flex-column">
+            <p class="fs-5 fw-bold">{{ msg_login }}</p>
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+                <input type="submit" value="Iniciar sesión">
+            </form>
+        </div>
+    </div>
 {% endblock %}
