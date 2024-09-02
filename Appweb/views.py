@@ -74,23 +74,23 @@ class ViniloListView(ListView):
     context_object_name = 'vinilo'
     template_name = 'ventanas/vinilos_lista.html'
 
-class ViniloDetailView(DetailView):
+class ViniloDetailView(LoginRequiredMixin, DetailView):
     model = Vinilo
     template_name = 'ventanas/vinilos_detalle.html'
 
-class ViniloCreateView(CreateView):
+class ViniloCreateView(LoginRequiredMixin, CreateView):
     model = Vinilo
     template_name = 'ventanas/vinilos_crear.html'
     success_url = reverse_lazy('ListarVinilos')
     fields = ['artista', 'album', 'genero', 'precio']
 
-class ViniloUpdateView(UpdateView):
+class ViniloUpdateView(LoginRequiredMixin, UpdateView):
     model = Vinilo
     template_name = 'ventanas/vinilos_editar.html'
     success_url = reverse_lazy('ListarVinilos')
     fields = ['artista', 'album', 'genero', 'precio']
 
-class ViniloDeleteView(DeleteView):
+class ViniloDeleteView(LoginRequiredMixin, DeleteView):
     model = Vinilo
     template_name = 'ventanas/vinilos_borrar.html'
     success_url = reverse_lazy('ListarVinilos')
@@ -100,23 +100,23 @@ class TocadiscosListView(ListView):
     context_object_name = 'reproductor'
     template_name = 'ventanas/tocadiscos_lista.html'
 
-class TocadiscosDetailView(DetailView):
+class TocadiscosDetailView(LoginRequiredMixin, DetailView):
     model = Reproductor
     template_name = 'ventanas/tocadiscos_detalle.html'
 
-class TocadiscosCreateView(CreateView):
+class TocadiscosCreateView(LoginRequiredMixin, CreateView):
     model = Reproductor
     template_name = 'ventanas/tocadiscos_crear.html'
     success_url = reverse_lazy('ListarTocadiscos')
     fields = ['marca', 'modelo', 'precio']
 
-class TocadiscosUpdateView(UpdateView):
+class TocadiscosUpdateView(LoginRequiredMixin, UpdateView):
     model = Reproductor
     template_name = 'ventanas/tocadiscos_editar.html'
     success_url = reverse_lazy('ListarTocadiscos')
     fields = ['marca', 'modelo', 'precio']
 
-class TocadiscosDeleteView(DeleteView):
+class TocadiscosDeleteView(LoginRequiredMixin, DeleteView):
     model = Reproductor
     template_name = 'ventanas/tocadiscos_borrar.html'
     success_url = reverse_lazy('ListarTocadiscos')
@@ -126,23 +126,23 @@ class ParlanteListView(ListView):
     context_object_name = 'parlante'
     template_name = 'ventanas/parlantes_lista.html'
 
-class ParlanteDetailView(DetailView):
+class ParlanteDetailView(LoginRequiredMixin, DetailView):
     model = Parlante
     template_name = ''
 
-class ParlanteCreateView(CreateView):
-    model = Parlante
-    template_name = ''
-    success_url = reverse_lazy('ListarParlantes')
-    fields = ['marca', 'tipo', 'potencia', 'precio']
-
-class ParlanteUpdateView(UpdateView):
+class ParlanteCreateView(LoginRequiredMixin, CreateView):
     model = Parlante
     template_name = ''
     success_url = reverse_lazy('ListarParlantes')
     fields = ['marca', 'tipo', 'potencia', 'precio']
 
-class ParlanteDeleteView(DeleteView):
+class ParlanteUpdateView(LoginRequiredMixin, UpdateView):
+    model = Parlante
+    template_name = ''
+    success_url = reverse_lazy('ListarParlantes')
+    fields = ['marca', 'tipo', 'potencia', 'precio']
+
+class ParlanteDeleteView(LoginRequiredMixin, DeleteView):
     model = Parlante
     template_name = ''
     success_url = reverse_lazy('ListarParlantes')
