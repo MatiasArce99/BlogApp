@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView
@@ -66,7 +65,6 @@ def logout_user(request):
         logout(request)
     return render(request, 'ventanas/inicio.html')
 
-#@login_required()
 class CambiarContrasenia(LoginRequiredMixin, PasswordChangeView):
     template_name = 'ventanas/cambiar_clave.html'
     success_url = reverse_lazy('EditarPerfil')

@@ -8,7 +8,8 @@ urlpatterns = [
     path('logout/', logout_user, name="Logout"),
     path('register/', register, name="Register"),
     path('editarPerfil/', editarPerfil, name="EditarPerfil"),
-    path('cambiarContrasenia/', CambiarContrasenia.as_view(), name="CambiarContrasenia"),
+    path('pass/', CambiarContrasenia.as_view(), name="CambiarPass"),
+    path('about/', about, name='AboutMe'),
 
     path('vinilosLista/', ViniloListView.as_view(), name='ListarVinilos'),
     path('vinilosDetalle/<pk>', ViniloDetailView.as_view(), name='VinilosDetalle'),

@@ -19,6 +19,7 @@
             <a href="{% url 'ListarVinilos' %}">Vinilos</a>
             <a href="{% url 'ListarTocadiscos' %}">Tocadiscos</a>
             <a href="{% url 'ListarParlantes' %}">Parlantes</a>
+            <a href="{% url 'AboutMe' %}">Acera de...</a>
         </div>
         <img src="{{ request.user.avatar.imagen.url }}" alt="" height="40px">
         {% if request.user.is_authenticated %}
