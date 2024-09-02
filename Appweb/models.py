@@ -19,7 +19,7 @@ class Parlante(models.Model):
     precio = models.FloatField()
 
 class Avatar(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    imagen = models.ImageField(upload_to='avatares', null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='pictures', null=True, blank=True)
     def __str__(self):
-        return f'Imagen de: {self.user.username}'
+        return f'Imagen de: {self.user} - {self.imagen}'

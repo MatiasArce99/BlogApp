@@ -1,9 +1,0 @@
-{% extends 'ventanas/base.html' %}
-{% load static %}
-{% block main %}
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button>Fin de la sesión</button>
-    </form>
-{% endblock %}

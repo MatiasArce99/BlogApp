@@ -7,6 +7,8 @@
         <table>
             {{ form }}
         </table>
-        <button>Cambiar</button>
+        <button type="button">
+            <a class="navbar-brand" href="{% url 'EditarPerfil' %}">Cambiar</a>
+        </button>
     </form>
 {% endblock %}

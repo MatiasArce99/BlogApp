@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,7 +15,6 @@ from .forms import UserRegisterForm, UserEditForm
 def ventana_inicio(request):
     return render(request, 'ventanas/inicio.html')
 
-#@login_required
 def login_request(request):
     msg_login = ""
     if request.method == 'POST':
@@ -24,11 +23,11 @@ def login_request(request):
             usuario = form.cleaned_data.get('username')
             clave = form.cleaned_data.get('password')
             user = authenticate(username=usuario, password=clave)
-            if user is not None:
+            if user:
                 login(request, user)
-                next_url = request.GET.get('next', '/')
-                return HttpResponseRedirect(next_url)
-        msg_login = "Usuario o contraseña incorrectos"
+                print(f'\nInicio de sesión exitosa\n')
+                return render(request, 'ventanas/inicio.html')
+        msg_login = "Usuario y/o contraseña incorrectos"
     form = AuthenticationForm()
     return render(request, 'ventanas/login.html', {'form': form, 'msg_login': msg_login})
 
@@ -40,25 +39,30 @@ def register(request):
             form.save()
             return render(request, 'ventanas/inicio.html')
         msg_register = "Error al registrar el usuario"
-    else:
-        form = UserRegisterForm(request.POST)
-    return render(request, 'ventanas/register.html', {'form':form, 'msg_register': msg_register})
+    form = UserRegisterForm()
+    return render(request, 'ventanas/register.html', {'form': form, 'msg_register': msg_register})
 
 #@login_required
 def editarPerfil(request):
     usuario = request.user
     if request.method == 'POST':
-        miFormulario = UserEditForm(request.POST, request.FILES, instance=usuario)
-        if miFormulario.is_valid():
-            if miFormulario.cleaned_data.get('imagen'):
-                usuario.avatar.imagen = miFormulario.cleaned_data.get('imagen')
-                usuario.avatar.save()
-            miFormulario.save()
+        mi_formulario = UserEditForm(request.POST, instance=usuario)
+        if mi_formulario.is_valid():
+            mi_formulario.save()
             return render(request, 'ventanas/inicio.html')
     else:
-        miFormulario = UserEditForm(initial={'imagen':usuario.avatar.imagen}, instance=usuario)
-    return render(request, 'ventanas/editarPerfil.html', {'form':miFormulario, 'usuario':usuario})
+        mi_formulario = UserEditForm(instance=usuario)
+    return render(request, 'ventanas/editarPerfil.html', {'form': mi_formulario})
 
+def about(request):
+    return render(request, 'ventanas/about.html')
+
+def logout_user(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return render(request, 'ventanas/inicio.html')
+
+#@login_required()
 class CambiarContrasenia(LoginRequiredMixin, PasswordChangeView):
     template_name = 'ventanas/cambiar_clave.html'
     success_url = reverse_lazy('EditarPerfil')
