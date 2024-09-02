@@ -42,12 +42,16 @@ def register(request):
     form = UserRegisterForm()
     return render(request, 'ventanas/register.html', {'form': form, 'msg_register': msg_register})
 
-#@login_required
+@login_required
 def editarPerfil(request):
     usuario = request.user
     if request.method == 'POST':
-        mi_formulario = UserEditForm(request.POST, instance=usuario)
+        mi_formulario = UserEditForm(request.POST, request.FILES, instance=usuario)
         if mi_formulario.is_valid():
+            if mi_formulario.cleaned_data.get('imagen'):
+                usuario.avatar.imagen = mi_formulario.cleaned_data.get('imagen')
+                usuario.avatar.save()
+
             mi_formulario.save()
             return render(request, 'ventanas/inicio.html')
     else:

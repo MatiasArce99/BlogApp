@@ -18,7 +18,7 @@ class UserEditForm(UserChangeForm):
     email = forms.EmailField(label='Ingrese su correo: ')
     apellido = forms.CharField(label='Apellido: ', required=False)
     nombre = forms.CharField(label='Nombre: ', required=False)
-    imagen = forms.ImageField(label='Imagen: ', required=False)
+    imagen = forms.ImageField(label='Avatar', required=False)
 
     class Meta:
         model = User

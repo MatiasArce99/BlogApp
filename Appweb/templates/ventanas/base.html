@@ -20,6 +20,7 @@
             <a href="{% url 'ListarTocadiscos' %}">Tocadiscos</a>
             <a href="{% url 'ListarParlantes' %}">Parlantes</a>
         </div>
+        <img src="{{ request.user.avatar.imagen.url }}" alt="" height="40px">
         {% if request.user.is_authenticated %}
             <div class="btn-group">
                 <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
