@@ -72,7 +72,7 @@ class CambiarContrasenia(LoginRequiredMixin, PasswordChangeView):
 class ViniloListView(ListView):
     model = Vinilo
     context_object_name = 'vinilo'
-    template_name = 'ventanas/vinilos_lista.html'
+    template_name = 'ventanas/vinilos_lista1.html'
 
 class ViniloDetailView(LoginRequiredMixin, DetailView):
     model = Vinilo
@@ -98,7 +98,7 @@ class ViniloDeleteView(LoginRequiredMixin, DeleteView):
 class TocadiscosListView(ListView):
     model = Reproductor
     context_object_name = 'reproductor'
-    template_name = 'ventanas/tocadiscos_lista.html'
+    template_name = 'ventanas/tocadiscos_lista1.html'
 
 class TocadiscosDetailView(LoginRequiredMixin, DetailView):
     model = Reproductor
@@ -124,25 +124,25 @@ class TocadiscosDeleteView(LoginRequiredMixin, DeleteView):
 class ParlanteListView(ListView):
     model = Parlante
     context_object_name = 'parlante'
-    template_name = 'ventanas/parlantes_lista.html'
+    template_name = 'ventanas/parlantes_lista1.html'
 
 class ParlanteDetailView(LoginRequiredMixin, DetailView):
     model = Parlante
-    template_name = ''
+    template_name = 'ventanas/parlantes_detalle.html'
 
 class ParlanteCreateView(LoginRequiredMixin, CreateView):
     model = Parlante
-    template_name = ''
+    template_name = 'ventanas/parlantes_crear.html'
     success_url = reverse_lazy('ListarParlantes')
     fields = ['marca', 'tipo', 'potencia', 'precio']
 
 class ParlanteUpdateView(LoginRequiredMixin, UpdateView):
     model = Parlante
-    template_name = ''
+    template_name = 'ventanas/parlantes_editar.html'
     success_url = reverse_lazy('ListarParlantes')
     fields = ['marca', 'tipo', 'potencia', 'precio']
 
 class ParlanteDeleteView(LoginRequiredMixin, DeleteView):
     model = Parlante
-    template_name = ''
+    template_name = 'ventanas/parlantes_borrar.html'
     success_url = reverse_lazy('ListarParlantes')

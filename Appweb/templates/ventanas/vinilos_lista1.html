@@ -1,0 +1,25 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Listado de vinilos en venta: </h1>
+    {% for v in vinilo %}
+        <ul>
+            <li>
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'aplication/assets/vinilo.jpg' %}" class="card-img-top" alt="100px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ v.artista }}</h5>
+                        <p class="card-text">Descripción vinilo</p>
+                        <a href="{% url 'VinilosDetalle' v.pk %}" class="btn btn-primary">Ver</a>
+                        <a href="{% url 'EditarVinilo' v.pk %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'BorrarVinilo' v.pk %}" class="btn btn-primary">Borrar</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    {% endfor %}
+    <br>
+    <p>
+        <a href="{% url 'CrearVinilo' %}">Agregar vinilo</a>
+    </p>
+{% endblock %}

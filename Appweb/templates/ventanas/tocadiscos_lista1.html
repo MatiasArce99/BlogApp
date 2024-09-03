@@ -1,0 +1,25 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Listado de vinilos en venta: </h1>
+    {% for t in reproductor %}
+        <ul>
+            <li>
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'aplication/assets/tocadiscos.jpg' %}" class="card-img-top" alt="100px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ t.marca }}</h5>
+                        <p class="card-text">Descripción tocadiscos</p>
+                        <a href="{% url 'DetalleTocadiscos' t.pk %}" class="btn btn-primary">Ver</a>
+                        <a href="{% url 'EditarTocadiscos' t.pk %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'BorrarTocadiscos' t.pk %}" class="btn btn-primary">Borrar</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    {% endfor %}
+    <br>
+    <p>
+        <a href="{% url 'CrearTocadiscos' %}">Agregar tocadiscos</a>
+    </p>
+{% endblock %}

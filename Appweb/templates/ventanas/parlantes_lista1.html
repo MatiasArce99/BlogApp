@@ -1,0 +1,25 @@
+{% extends 'ventanas/base.html' %}
+{% load static %}
+{% block main %}
+    <h1>Listado de vinilos en venta: </h1>
+    {% for p in parlante %}
+        <ul>
+            <li>
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'aplication/assets/parlantes.jpg' %}" class="card-img-top" alt="100px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ p.marca }}</h5>
+                        <p class="card-text">Descripción parlante</p>
+                        <a href="{% url 'DetalleParlantes' p.pk %}" class="btn btn-primary">Ver</a>
+                        <a href="{% url 'EditarParlantes' p.pk %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'BorrarParlantes' p.pk %}" class="btn btn-primary">Borrar</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    {% endfor %}
+    <br>
+    <p>
+        <a href="{% url 'CrearParlantes' %}">Agregar parlante</a>
+    </p>
+{% endblock %}
